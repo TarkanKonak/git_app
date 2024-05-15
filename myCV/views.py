@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from myCV.models import GeneralSetting, ImageSetting
+from myCV.models import GeneralSetting, ImageSetting, Skill
 
 
 # Create your views here.
@@ -14,24 +14,14 @@ def index(request):
     # -----------------------------------------------------------------------------------
     skill_description_name = GeneralSetting.objects.get(name='skill_description_name').parameter
     # -----------------------------------------------------------------------------------
-    skill_per_one = GeneralSetting.objects.get(name='skill_per_one').parameter
-    skill_per_two = GeneralSetting.objects.get(name='skill_per_two').parameter
-    skill_per_three = GeneralSetting.objects.get(name='skill_per_three').parameter
-    skill_per_four = GeneralSetting.objects.get(name='skill_per_four').parameter
-    skill_per_five = GeneralSetting.objects.get(name='skill_per_five').parameter
-    skill_per_six = GeneralSetting.objects.get(name='skill_per_six').parameter
-    # -----------------------------------------------------------------------------------
-    skill_name_one = GeneralSetting.objects.get(name='skill_name_one').parameter
-    skill_name_two = GeneralSetting.objects.get(name='skill_name_two').parameter
-    skill_name_three = GeneralSetting.objects.get(name='skill_name_three').parameter
-    skill_name_four = GeneralSetting.objects.get(name='skill_name_four').parameter
-    skill_name_five = GeneralSetting.objects.get(name='skill_name_five').parameter
-    skill_name_six = GeneralSetting.objects.get(name='skill_name_six').parameter
-    # -----------------------------------------------------------------------------------
-    #images
+    #Images
     header_logo = ImageSetting.objects.get(name='header_logo').file
     home_banner_image = ImageSetting.objects.get(name='home_banner_image').file
     site_favicon = ImageSetting.objects.get(name='site_favicon').file
+
+    # -----------------------------------------------------------------------------------
+    # Skills
+    skills = Skill.objects.all()
 
 
     context = {
@@ -43,22 +33,12 @@ def index(request):
         'home_banner_description': home_banner_description,
         'skill_description_name': skill_description_name,
         # -----------------------------------------------------------------------------------
-        'skill_per_one': skill_per_one,
-        'skill_per_two': skill_per_two,
-        'skill_per_three': skill_per_three,
-        'skill_per_four': skill_per_four,
-        'skill_per_five': skill_per_five,
-        'skill_per_six': skill_per_six,
-        # -----------------------------------------------------------------------------------
-        'skill_name_one': skill_name_one,
-        'skill_name_two': skill_name_two,
-        'skill_name_three': skill_name_three,
-        'skill_name_four': skill_name_four,
-        'skill_name_five': skill_name_five,
-        'skill_name_six': skill_name_six,
+
         # -----------------------------------------------------------------------------------
         'header_logo': header_logo,
         'home_banner_image': home_banner_image,
         'site_favicon': site_favicon,
+        # -----------------------------------------------------------------------------------
+        'skills': skills,
     }
     return render(request, 'index.html', context=context)

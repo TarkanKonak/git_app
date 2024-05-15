@@ -33,7 +33,7 @@
             <h1>
                 {{ home_banner_name }} <br>
                 {{ home_banner_title }} <br>
-                
+
             </h1>
 
             <div class="home-content__buttons">
@@ -100,33 +100,19 @@
         </div>
 
         <div class="col-six tab-full right">
-            <h3>{{ skill_description_name }}</h3>
-
+            <h3>I've Got Some skills.</h3>
             <ul class="skill-bars">
+                
+                
+                {% for skill in skills %}
                 <li>
-                    <div class="progress percent{{ skill_per_one }}"><span>{{ skill_per_one }}</span></div>
-                    <strong>{{ skill_name_one }}</strong>
-                </li>
-                <li>
-                    <div class="progress percent{{ skill_per_two }}"><span>{{ skill_per_two }}</span></div>
-                    <strong>{{ skill_name_two }} </strong>
-                </li>
-                <li>
-                    <div class="progress percent{{ skill_per_three }}"><span>{{ skill_per_three }}</span></div>
-                    <strong>{{ skill_name_three }}</strong>
-                </li>
-                <li>
-                    <div class="progress percent{{ skill_per_four }}"><span>{{ skill_per_four }}</span></div>
-                    <strong>{{ skill_name_four }}</strong>
-                </li>
-                <li>
-                    <div class="progress percent{{ skill_per_five }}"><span>{{ skill_per_five }}</span></div>
-                    <strong>{{ skill_name_five }}</strong>
-                </li>
-                <li>
-                    <div class="progress percent{{ skill_per_six }}"><span>{{ skill_per_six }}</span></div>
-                    <strong>{{ skill_name_six }}</strong>
-                </li>
+                    <div class="progress percent{{ skill.percentage }}"><span>{{ skill.percentage }}%</span></div>
+                    <strong>{{ skill.name }}</strong>
+                {% endfor %}
+                
+                
+                
+                
             </ul>
         </div>
 
@@ -512,9 +498,6 @@
 </section> <!-- end works -->
 
 
-
-
-
 <!-- s-stats
 ================================================== -->
 <section id="contact" class="s-contact target-section">
@@ -536,7 +519,7 @@
         <div class="col-eight tab-full contact__form">
             <form name="contactForm" id="contactForm" method="post" action="{% url 'contact_form' %}">
                 <fieldset>
-                    
+
                     <div class="form-field">
                         <input name="contactName" type="text" id="contactName" placeholder="Name" value="" minlength="2"
                                required="" aria-required="true" class="full-width">
