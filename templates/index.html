@@ -56,12 +56,10 @@
     </div> <!-- end home-content -->
 
     <ul class="home-social">
-        <li>
-            <a href="#"><i class="im im-facebook" aria-hidden="true"></i><span>Facebook</span></a>
-        </li>
-        <li>
-            <a href="#"><i class="im im-instagram" aria-hidden="true"></i><span>Instagram</span></a>
-        </li>
+        {% for social in social_medias %}
+            <li><a href="{{ social.link }}" target="_blank">{{ social.icon|safe  }}</a></li>
+        {% endfor %}
+       
     </ul>
     <!-- end home-social -->
 
@@ -102,17 +100,15 @@
         <div class="col-six tab-full right">
             <h3>I've Got Some skills.</h3>
             <ul class="skill-bars">
-                
-                
+
+
                 {% for skill in skills %}
-                <li>
+                    <li>
                     <div class="progress percent{{ skill.percentage }}"><span>{{ skill.percentage }}%</span></div>
                     <strong>{{ skill.name }}</strong>
                 {% endfor %}
-                
-                
-                
-                
+
+
             </ul>
         </div>
 
@@ -137,74 +133,31 @@
 
         <div class="col-six tab-full left">
             <div class="timeline">
-
-                <div class="timeline__block">
-                    <div class="timeline__bullet"></div>
-                    <div class="timeline__header">
-                        <p class="timeline__timeframe">July 2015 - Present</p>
-                        <h3>Awesome Studio</h3>
-                        <h5>Lead Designer</h5>
-                    </div>
-                    <div class="timeline__desc">
-                        <p>Lorem ipsum Occaecat do esse ex et dolor culpa nisi ex in magna consectetur nisi cupidatat
-                            laboris esse eiusmod deserunt aute do quis velit esse sed Ut proident cupidatat nulla esse
-                            cillum laborum occaecat nostrud sit dolor incididunt amet est occaecat nisi.</p>
-                    </div>
-                </div> <!-- end timeline__block -->
-
-                <div class="timeline__block">
-                    <div class="timeline__bullet"></div>
-                    <div class="timeline__header">
-                        <p class="timeline__timeframe">July 2014 - June 2015</p>
-                        <h3>Super Cool Agency</h3>
-                        <h5>Front-end Developer</h5>
-                    </div>
-                    <div class="timeline__desc">
-                        <p>Lorem ipsum Occaecat do esse ex et dolor culpa nisi ex in magna consectetur nisi cupidatat
-                            laboris esse eiusmod deserunt aute do quis velit esse sed Ut proident cupidatat nulla esse
-                            cillum laborum occaecat nostrud sit dolor incididunt amet est occaecat nisi incididunt.</p>
-                    </div>
-                </div> <!-- end timeline__block -->
-
-            </div> <!-- end timeline -->
-        </div> <!-- end left -->
-
-        <div class="col-six tab-full right">
-            <div class="timeline">
-
-                <div class="timeline__block">
-                    <div class="timeline__bullet"></div>
-                    <div class="timeline__header">
-                        <p class="timeline__timeframe">July 2012 - June 2014</p>
-                        <h3>Great Design Studio</h3>
-                        <h5>Web Designer</h5>
-                    </div>
-                    <div class="timeline__desc">
-                        <p>Lorem ipsum Occaecat do esse ex et dolor culpa nisi ex in magna consectetur nisi cupidatat
-                            laboris esse eiusmod deserunt aute do quis velit esse sed Ut proident cupidatat nulla esse
-                            cillum laborum occaecat nostrud sit dolor incididunt amet est occaecat nisi.</p>
-                    </div>
-                </div> <!-- end timeline__block -->
-
-                <div class="timeline__block">
-                    <div class="timeline__bullet"></div>
-                    <div class="timeline__header">
-                        <p class="timeline__timeframe">July 2011 - June 2012</p>
-                        <h3>Epic Design Agency</h3>
-                        <h5>Web Designer</h5>
-                    </div>
-                    <div class="timeline__desc">
-                        <p>Lorem ipsum Occaecat do esse ex et dolor culpa nisi ex in magna consectetur nisi cupidatat
-                            laboris esse eiusmod deserunt aute do quis velit esse sed Ut proident cupidatat nulla esse
-                            cillum laborum occaecat nostrud sit dolor incididunt amet est occaecat nisi incididunt.</p>
-                    </div>
-                </div> <!-- end timeline__block -->
-
-            </div> <!-- end timeline -->
-        </div> <!-- end right -->
-
+                {% for experience in experiences %}
+                    <div class="timeline__block">
+                        <div class="timeline__bullet"></div>
+                        <div class="timeline__header">
+                            <p class="timeline__timeframe">{{ experience.start_date|date:"M/Y" }} -
+                                {% if experience.end_date %}
+                                    {{ experience.end_date|date:"M/Y" }}
+                                {% else %}
+                                    Present
+                                {% endif %}
+                            </p>
+                            <h3>{{ experience.company_name }}</h3>
+                            <h5>{{ experience.job_title }}</h5>
+                        </div>
+                        <div class="timeline__desc">
+                            <p>Lorem ipsum Occaecat do esse ex et dolor culpa nisi ex in magna consectetur nisi
+                                cupidatat laboris esse eiusmod deserunt aute do quis velit esse sed Ut proident
+                                cupidatat nulla esse cillum laborum occaecat nostrud sit dolor incididunt amet est
+                                occaecat nisi.</p>
+                        </div>
+                    </div> <!-- end timeline__block -->
+                {% endfor %}
+            </div>
+        </div>
     </div> <!-- end about-content timeline -->
-
 </section> <!-- end about -->
 
 
@@ -518,6 +471,10 @@
     <div class="row contact__main">
         <div class="col-eight tab-full contact__form">
             <form name="contactForm" id="contactForm" method="post" action="{% url 'contact_form' %}">
+
+                {% csrf_token %}
+
+
                 <fieldset>
 
                     <div class="form-field">
@@ -641,5 +598,5 @@
 {% include 'includes/footer.html' %}
 </body>
 
-{% include 'includes/scripts.html' %}
+
 </html>

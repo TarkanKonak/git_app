@@ -21,6 +21,7 @@ class AbstractModel(models.Model):
     class Meta:
         abstract = True
 
+
 class GeneralSetting(AbstractModel):
     name = models.CharField(
         default='',
@@ -43,6 +44,7 @@ class GeneralSetting(AbstractModel):
         verbose_name='Parameter',
         help_text='',
     )
+
     def __str__(self):
         return f"General Setting: {self.name}"
 
@@ -75,14 +77,13 @@ class ImageSetting(AbstractModel):
         upload_to='images/',
     )
 
-
     def __str__(self):
         return f"Image Setting: {self.name}"
 
     class Meta:
         verbose_name = 'Image Setting'
         verbose_name_plural = 'Image Settings'
-        ordering = ('name', )
+        ordering = ('name',)
 
 
 class Skill(AbstractModel):
@@ -109,15 +110,15 @@ class Skill(AbstractModel):
     class Meta:
         verbose_name = 'Skill'
         verbose_name_plural = 'Skills'
-        ordering = ('order', )
+        ordering = ('order',)
 
 
 class Experience(AbstractModel):
     company_name = models.CharField(
-       default='',
-       max_length=254,
-       blank=True,
-       verbose_name='Company Name',
+        default='',
+        max_length=254,
+        blank=True,
+        verbose_name='Company Name',
     )
     job_title = models.CharField(
         default='',
@@ -134,15 +135,38 @@ class Experience(AbstractModel):
         blank=True,
         verbose_name='End Date',
     )
+
     def __str__(self):
         return f"Experience: {self.company_name}"
 
     class Meta:
         verbose_name = 'Experience'
         verbose_name_plural = 'Experiences'
-        ordering = ('start_date', )
+        ordering = ('start_date',)
 
 
+class SocialMedia(AbstractModel):
+    order = models.IntegerField(
+        default=0,
+        verbose_name='Order',
+    )
+    link = models.URLField(
+        default='',
+        verbose_name='Link',
+        blank=True,
+        max_length=254,
+    )
+    icon = models.CharField(
+        default='',
+        verbose_name='Icon',
+        blank=True,
+        max_length=254,
+    )
 
+    def __str__(self):
+        return f"Social Media: {self.link}"
 
-
+    class Meta:
+        verbose_name = 'Social Media'
+        verbose_name_plural = 'Social Media'
+        ordering = ('order',)

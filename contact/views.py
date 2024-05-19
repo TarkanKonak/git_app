@@ -8,4 +8,4 @@ def contact_form(request):
     }
     return JsonResponse(context)
 def index(request):
-    return render(request, '../../CV/templates/index.html')
+    return render(request, 'index.html')
