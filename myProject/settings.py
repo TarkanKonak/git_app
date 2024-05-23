@@ -80,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'myCV.views.layout',
             ],
         },
     },
@@ -148,3 +149,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+vars().update(env.email_url())
+DEFAULT_FROM_EMAIL = 'Tarkan KONAKÇI <info@tarkankonakci.com>'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
